@@ -1,5 +1,6 @@
-import { Instagram, Facebook, Twitter, Phone, Mail, MapPin } from "lucide-react";
+import { Instagram, Facebook, Music, Phone, Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 export default function Footer() {
   const logoUrl = "https://lh3.googleusercontent.com/d/1Tqp28bQEDCkgu8dAt8pnKYp2UMi8HMfg";
@@ -27,10 +28,10 @@ export default function Footer() {
         <div className="space-y-6">
           <h4 className="text-gold text-xs font-bold tracking-[0.3em] uppercase font-heading">Quick Links</h4>
           <ul className="space-y-4 text-sm text-white/60 font-light">
-            <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
-            <li><Link to="/about" className="hover:text-gold transition-colors">About Us</Link></li>
-            <li><Link to="/menu" className="hover:text-gold transition-colors">Our Cuisine</Link></li>
-            <li><Link to="/events" className="hover:text-gold transition-colors">Upcoming Events</Link></li>
+            <li><HashLink smooth to="/#home" className="hover:text-gold transition-colors">Home</HashLink></li>
+            <li><HashLink smooth to="/#about" className="hover:text-gold transition-colors">About Us</HashLink></li>
+            <li><HashLink smooth to="/#menu" className="hover:text-gold transition-colors">Our Cuisine</HashLink></li>
+            <li><HashLink smooth to="/#events" className="hover:text-gold transition-colors">Upcoming Events</HashLink></li>
             <li><Link to="/contacts" className="hover:text-gold transition-colors">Contact Us</Link></li>
           </ul>
         </div>
@@ -44,7 +45,7 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-gold" />
-              <span>+27 72 83 2290</span>
+              <span>072 183 2290</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-gold" />
@@ -56,14 +57,14 @@ export default function Footer() {
         <div className="space-y-6">
           <h4 className="text-gold text-xs font-bold tracking-[0.3em] uppercase font-heading">Follow Us</h4>
           <div className="flex gap-6">
-            <a href="https://www.facebook.com/officialmellowsloungecpt" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+            <a href="https://www.facebook.com/officialmellowsloungecpt" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="Facebook">
               <Facebook className="h-5 w-5" />
             </a>
-            <a href="https://x.com/mellows_32" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
-              <Twitter className="h-5 w-5" />
-            </a>
-            <a href="#" className="hover:text-gold transition-colors">
+            <a href="https://www.instagram.com/p/DR1mdKaDJv2/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="Instagram">
               <Instagram className="h-5 w-5" />
+            </a>
+            <a href="https://www.tiktok.com/@mellows_32" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="TikTok">
+              <Music className="h-5 w-5" />
             </a>
           </div>
           <div className="pt-6 border-t border-white/10">

@@ -55,7 +55,7 @@ export default function Location() {
                   <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold">Contact</h4>
                 </div>
                 <p className="text-muted-foreground text-sm font-light leading-relaxed">
-                  +27 72 83 2290<br />
+                  072 183 2290<br />
                   info@mellowslounge.co.za
                 </p>
               </div>

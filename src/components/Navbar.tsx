@@ -3,6 +3,7 @@ import { Moon, Sun, Menu, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Navbar() {
@@ -11,10 +12,11 @@ export default function Navbar() {
   const location = useLocation();
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Cuisine", href: "/menu" },
-    { name: "Events", href: "/events" },
+    { name: "Home", href: "/#home" },
+    { name: "About", href: "/#about" },
+    { name: "Cuisine", href: "/#menu" },
+    { name: "Gallery", href: "/#gallery" },
+    { name: "Events", href: "/#events" },
     { name: "Contacts", href: "/contacts" },
   ];
 
@@ -27,7 +29,7 @@ export default function Navbar() {
         <div className="flex gap-8">
           <div className="flex items-center gap-2">
             <Phone className="h-3 w-3" />
-            <span>+27 72 83 2290</span>
+            <span>072 183 2290</span>
           </div>
           <div className="flex items-center gap-2">
             <Mail className="h-3 w-3" />
@@ -60,15 +62,16 @@ export default function Navbar() {
         {/* Desktop Nav - Now at lg breakpoint */}
         <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link
+            <HashLink
               key={link.name}
+              smooth
               to={link.href}
               className={`text-[11px] font-bold transition-colors uppercase tracking-[0.2em] ${
-                location.pathname === link.href ? "text-gold" : "text-white/70 hover:text-white"
+                location.pathname === link.href.split('#')[0] && location.hash === '#' + link.href.split('#')[1] ? "text-gold" : "text-white/70 hover:text-white"
               }`}
             >
               {link.name}
-            </Link>
+            </HashLink>
           ))}
           <div className="flex items-center gap-4 border-l border-white/10 pl-6">
             <Button
@@ -104,16 +107,17 @@ export default function Navbar() {
             <SheetContent side="right" className="bg-background border-border">
               <div className="flex flex-col gap-8 mt-12">
                 {navLinks.map((link) => (
-                  <Link
+                  <HashLink
                     key={link.name}
+                    smooth
                     to={link.href}
                     onClick={() => setIsOpen(false)}
                     className={`text-2xl font-heading transition-colors ${
-                      location.pathname === link.href ? "text-gold" : "hover:text-gold"
+                      location.pathname === link.href.split('#')[0] && location.hash === '#' + link.href.split('#')[1] ? "text-gold" : "hover:text-gold"
                     }`}
                   >
                     {link.name}
-                  </Link>
+                  </HashLink>
                 ))}
                 <Link to="/bookings" onClick={() => setIsOpen(false)} className="mt-4">
                   <Button className="w-full bg-gold hover:bg-gold/90 text-black font-bold uppercase tracking-widest text-xs py-6 rounded-full transition-all duration-500">

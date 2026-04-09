@@ -1,15 +1,28 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 interface AboutProps {
   imageUrl?: string;
 }
 
 export default function About({ imageUrl }: AboutProps) {
+  const sectionRef = useRef<HTMLElement>(null);
   const defaultImageUrl = "https://lh3.googleusercontent.com/d/1JRYefAtrYalMMUysWbvRprGWiHGsog38";
   const aboutImageUrl = imageUrl || defaultImageUrl;
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section id="about" className="py-32 px-6 md:px-16 bg-background overflow-hidden">
+    <section 
+      id="about" 
+      ref={sectionRef}
+      className="py-32 px-6 md:px-16 bg-background overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -19,10 +32,11 @@ export default function About({ imageUrl }: AboutProps) {
           className="relative"
         >
           <div className="relative z-10 overflow-hidden aspect-[4/5] transition-all duration-1000">
-            <img
+            <motion.img
+              style={{ y }}
               src={aboutImageUrl}
               alt="About Mellows Lounge"
-              className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-1000"
+              className="w-full h-[120%] -top-[10%] absolute object-cover transition-transform duration-1000"
               referrerPolicy="no-referrer"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://picsum.photos/seed/about-lounge/800/1000";

@@ -63,7 +63,7 @@ export default function BookingsPage() {
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Call Us</p>
-                    <p className="text-sm">+27 72 83 2290</p>
+                    <p className="text-sm">072 183 2290</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
