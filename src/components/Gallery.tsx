@@ -24,12 +24,12 @@ const galleryImages = [
     span: "md:col-span-1 md:row-span-2",
   },
   {
-    src: "https://picsum.photos/seed/lounge-5/800/800",
+    src: "https://lh3.googleusercontent.com/d/1nFgGiKSJjURVH0wt1rpsJ7D5oj6szny0",
     alt: "Evening Vibe",
     span: "md:col-span-1 md:row-span-1",
   },
   {
-    src: "https://picsum.photos/seed/lounge-6/800/800",
+    src: "https://lh3.googleusercontent.com/d/1rwcsrcjrXFBwZFBMHwNtvcf3m5fDHZq5",
     alt: "Bar Detail",
     span: "md:col-span-1 md:row-span-1",
   },

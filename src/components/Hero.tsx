@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -31,19 +31,28 @@ const carouselItems = [
   },
   {
     type: "image",
-    src: "https://lh3.googleusercontent.com/d/1NYlxumXDSfM7jdRKybJm6havdMApYwAz",
+    src: "https://lh3.googleusercontent.com/d/1nFgGiKSJjURVH0wt1rpsJ7D5oj6szny0",
   },
   {
     type: "image",
-    src: "https://lh3.googleusercontent.com/d/1JRYefAtrYalMMUysWbvRprGWiHGsog38",
+    src: "https://lh3.googleusercontent.com/d/1rwcsrcjrXFBwZFBMHwNtvcf3m5fDHZq5",
   },
 ];
 
 export default function Hero() {
   const [api, setApi] = React.useState<CarouselApi>();
+  const sectionRef = React.useRef<HTMLElement>(null);
   const plugin = React.useRef(
     Autoplay({ delay: 8000, stopOnInteraction: false })
   );
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   // Handle video playback for the active slide
   React.useEffect(() => {
@@ -93,9 +102,16 @@ export default function Hero() {
   }, [api]);
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Background Carousel */}
-      <div className="absolute inset-0 z-0">
+    <section 
+      id="home" 
+      ref={sectionRef}
+      className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+    >
+      {/* Background Carousel with Parallax */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 z-0 h-[130%]"
+      >
         <Carousel
           setApi={setApi}
           plugins={[plugin.current]}
@@ -104,7 +120,7 @@ export default function Hero() {
             loop: true,
           }}
         >
-          <CarouselContent className="h-screen ml-0">
+          <CarouselContent className="h-full ml-0">
             {carouselItems.map((item, index) => (
               <CarouselItem key={index} className="pl-0 h-full">
                 <div className="relative h-full w-full bg-black">
@@ -137,9 +153,12 @@ export default function Hero() {
             ))}
           </CarouselContent>
         </Carousel>
-      </div>
+      </motion.div>
 
-      <div className="relative z-10 text-center px-6 w-full max-w-xl mt-auto mb-32">
+      <motion.div 
+        style={{ y: contentY }}
+        className="relative z-10 text-center px-6 w-full max-w-xl mt-auto mb-32"
+      >
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -157,7 +176,7 @@ export default function Hero() {
             </Button>
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
